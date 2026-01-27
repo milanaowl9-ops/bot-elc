@@ -2,15 +2,23 @@
 import logging
 from telegram import Update, KeyboardButton, ReplyKeyboardMarkup
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
+import os
+from dotenv import load_dotenv
+
+# Загружаем переменные окружения
+load_dotenv()
+
+# Получаем токен из переменных окружения
+BOT_TOKEN = os.getenv('BOT_TOKEN')
+
+if not BOT_TOKEN:
+    raise ValueError("Токен бота не найден в переменных окружения!")
 
 # Настройка логирования
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO
 )
-
-# Токен вашего бота (СГЕНЕРИРУЙТЕ НОВЫЙ ТОКЕН!)
-BOT_TOKEN = '8112326406:AAG-5PQuzpskMFTxn4FJz_HFE9-cEtuBs8o'
 
 # Создаем постоянную клавиатуру меню
 def get_main_keyboard():
